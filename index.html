@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Polymarket BTC Replay</title>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/ui.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Polymarket BTC Replay</h1>
+      <p>Replay BTC outcome signals against timestamped YES/NO books. See which simulated orders fill and why the others do not.</p>
+    </header>
+    <form action="/api/replay" method="get">
+      <label for="shares">Shares per signal
+        <input type="number" id="shares" name="shares" value="10" min="0.01" max="10000" step="0.01" required>
+      </label>
+      <label for="latency">Order delay (ms)
+        <input type="number" id="latency" name="latency" value="500" min="0" max="10000" step="1" required>
+      </label>
+      <label for="limit">Maximum buy price ($)
+        <input type="number" id="limit" name="limit" value="0.58" min="0.01" max="0.99" step="0.01" required>
+      </label>
+      <label for="fee">Assumed fee (bp)
+        <input type="number" id="fee" name="fee" value="20" min="0" max="1000" step="1" required>
+      </label>
+      <button type="submit">Replay orders</button>
+    </form>
+    <p id="error" role="alert"></p>
+    <p id="status" role="status"></p>
+    <dl id="metrics" aria-label="Replay totals"></dl>
+    <h2 id="result-heading">Order journal</h2>
+    <div class="table" tabindex="0" role="region" aria-labelledby="result-heading">
+      <table aria-labelledby="result-heading">
+        <thead><tr></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <noscript><p>JavaScript is only needed to render the table. The form opens the JSON result without it.</p></noscript>
+  </main>
+</body>
+</html>
